@@ -1,19 +1,24 @@
-import React from 'react';
-import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
-import Home from './Home';
-import DynamicPage from './DynamicPage';
-import NoMatch from './NoMatch';
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/dynamic" component={DynamicPage} />
-          <Route component={NoMatch} />
-        </Switch>
-      </div>
-    </Router>
-  );
-};
+import React, { Component } from 'react';
+
+class App extends Component {
+
+  componentDidMount() {
+    let naver = window.naver;
+    let mapOptions = {
+      zoom: 7,
+      zoomControl: true,
+      zoomControlOptions: {
+        style: naver.maps.ZoomControlStyle.SMALL,
+        position: naver.maps.Position.TOP_RIGHT
+      }
+    }
+    let map = new naver.maps.Map('map', mapOptions);
+  }
+  render() {	  
+    return ( 
+      <div id='map' style={{ height: '100vh' }}></div>  
+    );
+  }	  
+}
+
 export default App;
