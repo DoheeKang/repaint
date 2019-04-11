@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import DrawingBox from "./DrawingBox";
+import "../less/App.less";
 
 class App extends Component {
   componentDidMount() {
@@ -13,7 +15,13 @@ class App extends Component {
     let map = new naver.maps.Map("map", mapOptions);
   }
   render() {
-    return <div id="map" style={{ height: "100vh" }} />;
+    return (
+      <div id="wrapper">
+        <div id="map">
+          <DrawingBox />
+        </div>
+      </div>
+    );
   }
 }
 
