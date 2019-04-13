@@ -4,6 +4,7 @@ import '../less/App.less'
 
 class App extends Component {
   state = {
+    // 그리기 모드 확인
     isDrawing: false
   }
   componentDidMount() {
@@ -18,12 +19,19 @@ class App extends Component {
     let map = new naver.maps.Map('map', mapOptions)
   }
 
+  handleToggleisDrawing = () => {
+    const { isDrawing } = this.state
+    this.setState({
+      isDrawing: !isDrawing
+    })
+  }
+
   render() {
     const { isDrawing } = this.state
     return (
       <div id="wrapper">
         <div id="map">
-          <DrawingBox isDrawing={isDrawing} />
+          <DrawingBox onToggle={this.handleToggleisDrawing} />
         </div>
       </div>
     )
