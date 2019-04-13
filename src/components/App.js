@@ -1,8 +1,11 @@
-import React, { Component } from "react";
-import DrawingBox from "./DrawingBox";
-import "../less/App.less";
+import React, { Component } from 'react'
+import DrawingBox from './DrawingBox'
+import '../less/App.less'
 
 class App extends Component {
+  state = {
+    isDrawing: false
+  }
   componentDidMount() {
     let mapOptions = {
       zoom: 7,
@@ -11,18 +14,20 @@ class App extends Component {
         style: naver.maps.ZoomControlStyle.SMALL,
         position: naver.maps.Position.TOP_RIGHT
       }
-    };
-    let map = new naver.maps.Map("map", mapOptions);
+    }
+    let map = new naver.maps.Map('map', mapOptions)
   }
+
   render() {
+    const { isDrawing } = this.state
     return (
       <div id="wrapper">
         <div id="map">
-          <DrawingBox />
+          <DrawingBox isDrawing={isDrawing} />
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
