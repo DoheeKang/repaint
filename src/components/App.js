@@ -17,6 +17,12 @@ class App extends Component {
       }
     }
     let map = new naver.maps.Map('map', mapOptions)
+    naver.maps.Event.addListener(map, 'click', e => {
+      const { isDrawing } = this.state
+      if (isDrawing) {
+        console.log('도형을 그리자')
+      }
+    })
   }
 
   handleToggleisDrawing = () => {
