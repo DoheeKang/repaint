@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import DrawingBox from './DrawingBox'
+import Rect from '../customOverlay/Rect'
 import '../less/App.less'
 
 class App extends Component {
@@ -20,7 +21,15 @@ class App extends Component {
     naver.maps.Event.addListener(map, 'click', e => {
       const { isDrawing } = this.state
       if (isDrawing) {
-        console.log('도형을 그리자')
+        var overlay = new Rect({
+          position: e.coord
+        })
+        overlay.setMap(map)
+
+        // 도형을 하나 그리면 도형 그리기모드 종료
+        this.setState({
+          isDrawing: false
+        })
       }
     })
   }
