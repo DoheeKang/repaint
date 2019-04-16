@@ -32,7 +32,7 @@ class DrawingBox extends Component {
       let lineData = []
       naver.maps.Event.addListener(map, 'click', e => {
         // isDrawingMode: 그리기 모드이냐 (그리기가 끝나면 false로 바꿔주어야함)
-        const { isDrawingMode, onToggle } = this.props
+        const { isDrawingMode, toggleisDrawing } = this.props
         // 그리기 모드인경우
         if (isDrawingMode) {
           const { coord, offset } = e
@@ -61,7 +61,7 @@ class DrawingBox extends Component {
             this.setState({
               drawingList: drawingList.concat(figure)
             })
-            onToggle()
+            toggleisDrawing()
             lineData = []
           }
         }
@@ -92,24 +92,32 @@ class DrawingBox extends Component {
     })
   }
 
+  handleClose = () => {
+    const { toggleshowDraw } = this.props
+    toggleshowDraw()
+  }
   render() {
-    const { onToggle } = this.props
+    const { toggleisDrawing, isDrawingMode } = this.props
     const { drawingList } = this.state
     return (
       <div id="drawingBox">
         <ShapeButtonList
           shapeList={this.shapeList}
-          onToggle={onToggle}
+          toggleisDrawing={toggleisDrawing}
           handleDrawShape={this.handleDrawShape}
         />
-        <FactorButtonList
-          factorList={this.factorList}
-          handleDrawFactor={this.handleDrawFactor}
-        />
+        <div className={isDrawingMode ? 'show' : 'hide'}>
+          <FactorButtonList
+            factorList={this.factorList}
+            handleDrawFactor={this.handleDrawFactor}
+          />
+        </div>
         <DrawingList
           drawingList={drawingList}
           handleRemoveDrawingList={this.handleRemoveDrawingList}
         />
+        <div>저장</div>
+        <div onClick={this.handleClose}>닫기</div>
       </div>
     )
   }

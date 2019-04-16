@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 class ShapeButton extends Component {
   handleClick = shape => {
-    const { onToggle, handleDrawShape } = this.props
-    onToggle()
+    const { toggleisDrawing, handleDrawShape } = this.props
+    toggleisDrawing()
     handleDrawShape(shape)
   }
   render() {

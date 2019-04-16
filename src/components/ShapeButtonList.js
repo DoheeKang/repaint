@@ -3,12 +3,12 @@ import ShapeButton from './ShapeButton'
 
 class ShapeButtonList extends Component {
   render() {
-    const { shapeList, onToggle, handleDrawShape } = this.props
+    const { shapeList, toggleisDrawing, handleDrawShape } = this.props
     const buttonList = shapeList.map((shape, idx) => (
       <ShapeButton
         key={idx}
         shape={shape}
-        onToggle={onToggle}
+        toggleisDrawing={toggleisDrawing}
         handleDrawShape={handleDrawShape}
       />
     ))
