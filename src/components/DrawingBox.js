@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ShapeButtonList from './ShapeButtonList'
 import FactorButtonList from './FactorButtonList'
+import DrawingList from './DrawingList'
 import Rect from '../CustomOverlay/Rect'
 import '../less/DrawingBox.less'
 
@@ -19,7 +20,10 @@ class DrawingBox extends Component {
   drawShape = ''
   // 그릴 호재 종류
   factor = ''
-
+  state = {
+    // 그린 도형 목록
+    drawingList: []
+  }
   componentDidUpdate(prevProps) {
     const { map } = this.props
     if (prevProps.map !== map) {
@@ -28,7 +32,7 @@ class DrawingBox extends Component {
       let lineData = []
       naver.maps.Event.addListener(map, 'click', e => {
         // isDrawingMode: 그리기 모드이냐 (그리기가 끝나면 false로 바꿔주어야함)
-        const { isDrawingMode } = this.props
+        const { isDrawingMode, onToggle } = this.props
         // 그리기 모드인경우
         if (isDrawingMode) {
           const { coord, offset } = e
@@ -44,11 +48,20 @@ class DrawingBox extends Component {
             })
             figure.setMap(map)
           } else {
+            const { drawingList } = this.state
             isClicked = false
             lineData.pop()
+            // let info = document.createElement('div')
+            // let input = document.createElement('input')
+            // info.setAttribute('id', 'info')
+            // info.innerText = 'hello'
+            // info.appendChild(input)
+            // figure._element.appendChild(info)
+            // info.classList.toggle('show')
             this.setState({
-              isDrawingMode: false
+              drawingList: drawingList.concat(figure)
             })
+            onToggle()
             lineData = []
           }
         }
@@ -62,6 +75,7 @@ class DrawingBox extends Component {
         }
       })
     }
+    naver.maps.Event.addListener(map, 'rightclick', e => {})
   }
   handleDrawShape = drawShape => {
     this.drawShape = drawShape
@@ -71,8 +85,16 @@ class DrawingBox extends Component {
     this.factor = factor
   }
 
+  handleRemoveDrawingList = drawing => {
+    const { drawingList } = this.state
+    this.setState({
+      drawingList: drawingList.filter(el => el !== drawing)
+    })
+  }
+
   render() {
     const { onToggle } = this.props
+    const { drawingList } = this.state
     return (
       <div id="drawingBox">
         <ShapeButtonList
@@ -83,6 +105,10 @@ class DrawingBox extends Component {
         <FactorButtonList
           factorList={this.factorList}
           handleDrawFactor={this.handleDrawFactor}
+        />
+        <DrawingList
+          drawingList={drawingList}
+          handleRemoveDrawingList={this.handleRemoveDrawingList}
         />
       </div>
     )
