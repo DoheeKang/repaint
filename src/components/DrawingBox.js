@@ -94,6 +94,15 @@ class DrawingBox extends Component {
 
   handleClose = () => {
     const { toggleshowDraw } = this.props
+    const { drawingList } = this.state
+    // 그린 후 저장하지 않고 닫으려고 하는 경우
+    if (drawingList.length) {
+      console.log('저장하지 않으면 지워집니다')
+      drawingList.forEach(drawing => drawing.onRemove())
+      this.setState({
+        drawingList: []
+      })
+    }
     toggleshowDraw()
   }
   render() {
