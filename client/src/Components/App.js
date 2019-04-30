@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import DrawingBox from './DrawingBox'
+import FilterBox from './FilterBox'
 import '../less/App.less'
 
 class App extends Component {
@@ -7,7 +8,8 @@ class App extends Component {
     map: undefined,
     // 그리기 모드 확인
     isDrawingMode: false,
-    showDraw: true
+    showDraw: true,
+    showFilter: false
   }
   componentDidMount() {
     let mapOptions = {
@@ -29,6 +31,13 @@ class App extends Component {
     })
   }
 
+  toggleshowFilter = () => {
+    const { showFilter } = this.state
+    this.setState({
+      showFilter: !showFilter
+    })
+  }
+
   toggleshowDraw = () => {
     const { showDraw } = this.state
     this.setState({
@@ -37,12 +46,17 @@ class App extends Component {
   }
 
   render() {
-    const { map, isDrawingMode, showDraw } = this.state
+    const { map, isDrawingMode, showDraw, showFilter } = this.state
     return (
       <div id="wrapper">
         <div id="map">
-          <div className="menu" onClick={this.toggleshowDraw}>
-            그리기
+          <div id="menu">
+            <div className="menuBtn" onClick={this.toggleshowFilter}>
+              필터
+            </div>
+            <div className="menuBtn" onClick={this.toggleshowDraw}>
+              그리기
+            </div>
           </div>
           <div className={showDraw ? 'show' : 'hide'}>
             <DrawingBox
@@ -51,6 +65,9 @@ class App extends Component {
               toggleisDrawing={this.toggleisDrawing}
               toggleshowDraw={this.toggleshowDraw}
             />
+          </div>
+          <div className={showFilter ? 'show' : 'hide'}>
+            <FilterBox />
           </div>
         </div>
       </div>
