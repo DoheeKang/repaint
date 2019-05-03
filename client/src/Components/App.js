@@ -9,7 +9,9 @@ class App extends Component {
     // 그리기 모드 확인
     isDrawingMode: false,
     showDraw: true,
-    showFilter: false
+    showFilter: false,
+    // 화면상에 그릴 도형 리스트
+    drawList: []
   }
   componentDidMount() {
     let mapOptions = {
@@ -29,6 +31,14 @@ class App extends Component {
     this.setState({
       isDrawingMode: !isDrawingMode
     })
+  }
+
+  handleDrawList = newDrawList => {
+    const { drawList } = this.state
+    this.setState({
+      drawList: drawList.concat(newDrawList)
+    })
+    // 서버로 요청보내 데이터 가져오기
   }
 
   toggleshowFilter = () => {
@@ -67,7 +77,10 @@ class App extends Component {
             />
           </div>
           <div className={showFilter ? 'show' : 'hide'}>
-            <FilterBox />
+            <FilterBox
+              toggleshowFilter={this.toggleshowFilter}
+              handleDrawList={this.handleDrawList}
+            />
           </div>
         </div>
       </div>
