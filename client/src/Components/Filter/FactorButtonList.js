@@ -2,12 +2,6 @@ import React, { Component } from 'react'
 import FactorButton from './FactorButton'
 
 class FactorButtonList extends Component {
-  handleClick = () => {
-    const { handleDrawList } = this.props
-    if (handleDrawList) {
-      handleDrawList('My')
-    }
-  }
   render() {
     const { factorList, handleDrawFactor, handleDrawList } = this.props
     const factorButtonList = factorList.map((factor, idx) => (
@@ -21,7 +15,7 @@ class FactorButtonList extends Component {
     return (
       <div>
         {factorButtonList}
-        <div onClick={() => this.handleClick('My')}> My </div>
+        <div onClick={() => handleDrawList('My')}> My </div>
       </div>
     )
   }
