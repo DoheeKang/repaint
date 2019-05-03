@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import DrawingBox from './DrawingBox'
-import FilterBox from './FilterBox'
+import DrawingBox from './Draw/DrawingBox'
+import FilterBox from './Filter/FilterBox'
 import '../less/App.less'
 
 class App extends Component {

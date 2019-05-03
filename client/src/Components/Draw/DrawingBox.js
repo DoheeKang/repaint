@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import ShapeButtonList from './ShapeButtonList'
-import FactorButtonList from './FactorButtonList'
+import FactorButtonList from '../Filter/FactorButtonList'
 import DrawingList from './DrawingList'
-import Rect from '../CustomOverlay/Rect'
-import '../less/DrawingBox.less'
+import Rect from '../../CustomOverlay/Rect'
+import '../../less/DrawingBox.less'
 
 class DrawingBox extends Component {
   shapeList = ['Line', 'Arrow', 'Rect', 'Circle', 'Polygon']
