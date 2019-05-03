@@ -11,14 +11,16 @@ class FilterBox extends Component {
     '대중교통',
     '기타'
   ]
+
   render() {
-    const { toggleshowFilter, handleDrawList } = this.props
+    const { toggleshowFilter, handleDrawList, resetDrawList } = this.props
     return (
       <div id="filterBox">
         <FactorButtonList
           factorList={this.factorList}
           handleDrawList={handleDrawList}
         />
+        <div onClick={resetDrawList}>모두 초기화</div>
         <div onClick={toggleshowFilter}>닫기</div>
       </div>
     )

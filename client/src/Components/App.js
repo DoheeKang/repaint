@@ -38,7 +38,14 @@ class App extends Component {
     this.setState({
       drawList: drawList.concat(newDrawList)
     })
+    console.log(drawList)
     // 서버로 요청보내 데이터 가져오기
+  }
+
+  resetDrawList = () => {
+    this.setState({
+      drawList: []
+    })
   }
 
   toggleshowFilter = () => {
@@ -80,6 +87,7 @@ class App extends Component {
             <FilterBox
               toggleshowFilter={this.toggleshowFilter}
               handleDrawList={this.handleDrawList}
+              resetDrawList={this.resetDrawList}
             />
           </div>
         </div>
