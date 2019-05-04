@@ -40,9 +40,9 @@ class App extends Component {
       drawList: drawList.concat(newDrawList)
     })
     axios
-      .get('/filter')
-      .then(data => {
-        console.log(response)
+      .get('http://localhost:3000/filter')
+      .then(res => {
+        console.log(res.data)
       })
       .catch(error => {
         console.log(error)
