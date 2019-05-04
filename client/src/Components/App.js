@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import DrawingBox from './Draw/DrawingBox'
 import FilterBox from './Filter/FilterBox'
 import '../less/App.less'
@@ -38,8 +39,14 @@ class App extends Component {
     this.setState({
       drawList: drawList.concat(newDrawList)
     })
-    console.log(drawList)
-    // 서버로 요청보내 데이터 가져오기
+    axios
+      .get('/filter')
+      .then(data => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   resetDrawList = () => {
